@@ -7,7 +7,6 @@ function Sidebar({selectedMenu,setSelectedMenu}) {
     return (
         <ChakraProvider>
             <Flex direction={{ base: 'column', md: 'row' }} height="100vh">
-                {/* Sidebar */}
                 <Box
                     w={{ base: '100%', md: '250px' }}
                     bg="gray.100"
@@ -15,8 +14,8 @@ function Sidebar({selectedMenu,setSelectedMenu}) {
                     borderRight="1px solid #ddd"
                     display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
                 >
-                    <VStack align="flex-start" mt="13px">
-                        <Text fontSize="lg" fontWeight="normal">Menu</Text>
+                    <VStack  mt="25px">
+                        <Text fontSize="xl" fontWeight="bold" mb="20px">Menu</Text>
                         <Button
                             w="full"
                             variant="ghost"
@@ -44,7 +43,6 @@ function Sidebar({selectedMenu,setSelectedMenu}) {
                     </VStack>
                 </Box>
 
-                {/* Mobile Menu Toggle */}
                 <Box
                     display={{ base: 'block', md: 'none' }}
                     position="absolute"

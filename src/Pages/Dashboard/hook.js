@@ -7,8 +7,9 @@ export default function Hook () {
     useEffect(()=>{
         const fetchPolicy = async() => {
             try{
-                const response = await axios.get('http://evantage.ddns.net/evantage_api/get_password_policy.php')
-                setPasswordPolicy(response.data.data[0])
+                const response = await axios.get('http://localhost:3001/api/password-policy')
+                setPasswordPolicy(response.data)
+                
             } catch (error) {
                 console.error('Error fetching policy',error)
             }

@@ -3,7 +3,7 @@ import { ChakraProvider, Box, Button, FormControl, FormLabel, Input, Select, For
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import logo from '../../Assets/Full-Logo-Evantage.png'
+import logo from '../../Assets/Full-Logo-Evantage.png';
 
 function Login() {
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -11,7 +11,6 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  // const [authenticated, setAuthenticated] = useState();
 
   useEffect(() => {
     axios
@@ -54,12 +53,7 @@ function Login() {
     if (username && password && formatSiteCode) {
       axios.get(`http://evantage.ddns.net/evantage_api/authenticate_login.php?site_cd=${formatSiteCode}&login_id=${username}&password=${password}`)
         .then((response) => {
-          console.log('xxx2', response);
           if (response.data.status === "SUCCESS") {
-            localStorage.setItem('isAuthenticated', true);
-  
-            // setAuthenticated(true); 
-  
             navigate('/admin');
           } else {
             alert('Authentication failed');
@@ -94,7 +88,11 @@ function Login() {
                 id="username"
                 type="text"
                 placeholder="Enter your username"
-                {...register('username', { required: 'Username is required' })}
+                {...register('username', { 
+                  required: 'Username is required',
+                  maxLength: { value: 15, message: 'Username cannot exceed 15 characters' },
+                  pattern: { value: /^[a-zA-Z0-9]+$/, message: 'Username cannot contain special characters' }
+                })}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -107,7 +105,10 @@ function Login() {
                 id="password"
                 type="password"
                 placeholder="Enter your password"
-                {...register('password', { required: 'Password is required' })}
+                {...register('password', { 
+                  required: 'Password is required',
+                  maxLength: { value: 10, message: 'Password cannot exceed 10 characters' }
+                })}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+User documentation !
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Login page
 
-## Available Scripts
+![Alt text](../../Login%20page.png)
 
-In the project directory, you can run:
+User are required to insert username, password and pick site code
 
-### `npm start`
+## Validation on login page
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![Alt text](../../picture2.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Username and password are required
 
-### `npm test`
+![Alt text](../../picture3.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Max length user is 15 characters while password is 10 chatacters
 
-### `npm run build`
+![Alt text](../../picture4.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Username cannot contain special characters (Example: '',;:@)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Alt text](../../picture5.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Picking site code are required
 
-### `npm run eject`
+![Alt text](../../picture6.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+5. If there are register company name being type in username field, under dropdown site code will automatically update and display site code
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Alt text](../../picture7.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+6. If username and password are wrong or the company was not being register under the picken site code, authentication will be failed
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![Alt text](../../picture8.png)
 
-## Learn More
+This is home page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![Alt text](../../picture9.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+User can log out by click the avater and choose log out
 
-### Code Splitting
+![Alt text](../../picture10.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This is about us page
 
-### Analyzing the Bundle Size
+![Alt text](../../picture11.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This is policy password page
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. User can change the policy password by clicking edit button 
+2. Make changes you want for example allow password aging control to true
+3. Click save change to save the edit
+4. Pop up alert will mention password policy updated successfully!

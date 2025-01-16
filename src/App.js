@@ -1,18 +1,14 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import Login from "./Pages/Login";
-import Dashboard from "./Pages/Dashboard";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-  // const isAuthenticated = localStorage.getItem('isAuthenticated') === "true";
-  // console.log('lll', isAuthenticated);
-
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
           path="/admin"
-          // element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />}
           element={ <Dashboard />}
         />
       </Routes>

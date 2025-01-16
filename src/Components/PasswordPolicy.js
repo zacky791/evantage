@@ -4,7 +4,7 @@ import { Box, FormControl, FormLabel, Input, Checkbox, Select, Button, Flex } fr
 export default function PasswordPolicyForm({ policy }) {
     const [isEditing, setIsEditing] = useState(false);
     const [auditUser, setAuditUser] = useState(policy['audit_user']);
-    const [auditDate, setAuditDate] = useState(new Date(policy['audit_date']['date']).toLocaleString());
+    const [auditDate, setAuditDate] = useState(new Date(policy['audit_date']).toLocaleDateString('en-GB'));
     const [passwordAgingInterval, setPasswordAgingInterval] = useState(policy['pwd_set_agi_itr']);
     const [advanceNotice, setAdvanceNotice] = useState(policy['pwd_set_adv_not']);
     const [minLength, setMinLength] = useState(policy['pwd_set_min_len']);
@@ -14,26 +14,54 @@ export default function PasswordPolicyForm({ policy }) {
     const [maxFailedAttempts, setMaxFailedAttempts] = useState(policy['pwd_set_max_failed_attempt']);
     const [allowMultipleSessions, setAllowMultipleSessions] = useState(policy['pwd_set_allow_multiple_session']);
     const [passwordAgingControl, setPasswordAgingControl] = useState(policy['cf_pwd_set_agi_ctr'] === '1');
+    const today = new Date();
+    const todayDate = today.getFullYear() + '/' + String(today.getMonth() + 1).padStart(2, '0') + '/' + String(today.getDate()).padStart(2, '0');
 
     const handleEditClick = () => {
         setIsEditing(true);
     };
 
-    const handleSaveClick = () => {
+    const handleSaveClick = async () => {
         setIsEditing(false);
-        console.log("Saving updated policy:", {
-            auditUser,
-            auditDate,
-            passwordAgingInterval,
-            advanceNotice,
-            minLength,
-            maxLength,
-            passwordCriteria,
-            adjacentChecking,
-            maxFailedAttempts,
-            allowMultipleSessions,
-            passwordAgingControl,
-        });
+
+        const updatedPolicy = {
+            RowID: policy['RowID'],
+            policyData: {
+                cf_pwd_set_agi_ctr: passwordAgingControl ? 1 : 0,
+                pwd_set_agi_ctr: passwordAgingInterval,
+                pwd_set_agi_itr: passwordAgingInterval,
+                pwd_set_adv_not: advanceNotice,
+                pwd_set_min_len: minLength,
+                pwd_set_max_len: maxLength,
+                pwd_set_pwd_cri: passwordCriteria,
+                pwd_set_adj_chk: adjacentChecking,
+                audit_user: auditUser,
+                audit_date: todayDate,
+                pwd_set_max_failed_attempt: maxFailedAttempts,
+                pwd_set_allow_multiple_session: allowMultipleSessions,
+            },
+        };
+
+        console.log("Saving updated policy:", updatedPolicy);
+
+        try {
+            const response = await fetch('http://localhost:3001/api/password-policy/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedPolicy),
+            });
+
+            if (response.ok) {
+                alert('Password policy updated successfully!');
+            } else {
+                alert('Failed to update password policy');
+            }
+        } catch (error) {
+            console.error('Error updating password policy:', error);
+            alert('Error updating password policy');
+        }
     };
 
     return (
@@ -135,8 +163,8 @@ export default function PasswordPolicyForm({ policy }) {
                     <FormLabel htmlFor="allowMultipleSessions" mb={0}>Allow Multiple Session per User</FormLabel>
                     <Checkbox
                         id="allowMultipleSessions"
-                        isChecked={allowMultipleSessions === '1'}
-                        onChange={(e) => setAllowMultipleSessions(e.target.checked ? '1' : '0')}
+                        isChecked={allowMultipleSessions}
+                        onChange={(e) => setAllowMultipleSessions(e.target.checked ? 1 : 0)}
                         isDisabled={!isEditing}
                     />
                 </FormControl>
@@ -148,8 +176,7 @@ export default function PasswordPolicyForm({ policy }) {
                         id="auditUser"
                         type="text"
                         value={auditUser}
-                        onChange={(e) => setAuditUser(e.target.value)}
-                        readOnly={!isEditing}
+                        readOnly
                     />
                 </FormControl>
 
@@ -159,8 +186,7 @@ export default function PasswordPolicyForm({ policy }) {
                         id="auditDate"
                         type="text"
                         value={auditDate}
-                        onChange={(e) => setAuditDate(e.target.value)}
-                        readOnly={!isEditing}
+                        readOnly
                     />
                 </FormControl>
 
