@@ -1,4 +1,4 @@
-User documentation !
+## User documentation
 
 ## Login page
 
@@ -8,11 +8,11 @@ User are required to insert username, password and pick site code
 
 ## Validation on login page
 
-![Alt text](../../picture2.png)
+![Alt text](./src/Assets/picture2.png)
 
 1. Username and password are required
 
-![Alt text](../../picture3.png)
+![Alt text](./public/picture3.png)
 
 2. Max length user is 15 characters while password is 10 chatacters
 
@@ -33,6 +33,8 @@ User are required to insert username, password and pick site code
 6. If username and password are wrong or the company was not being register under the picken site code, authentication will be failed
 
 ![Alt text](../../picture8.png)
+
+## Inside landing page
 
 This is home page
 
